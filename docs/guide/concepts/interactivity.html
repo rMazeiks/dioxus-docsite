@@ -118,7 +118,7 @@
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        <a href="https://github.com/rust-lang/mdBook/tree/master/guide" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/dioxuslabs/dioxus/tree/master/docs" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
                         <a href="https://github.com/rust-lang/mdBook/edit/master/guide/src/concepts/interactivity.md" title="Suggest an edit" aria-label="Suggest an edit">
@@ -209,14 +209,14 @@
             url: String::from(&quot;dioxuslabs.com&quot;),
             title: String::from(&quot;Hello, world&quot;),
             original_poster: String::from(&quot;dioxus&quot;)
-        }        
+        }
     });
 
     cx.render(rsx!{
         Title { title: &amp;post.title }
         Score { score: &amp;post.score }
         // etc
-    })   
+    })
 }
 <span class="boring">}
 </span></code></pre></pre>
@@ -253,7 +253,7 @@
             &quot;Generate a random post&quot;
         }
         Post { props: &amp;post }
-    })   
+    })
 }
 <span class="boring">}
 </span></code></pre></pre>

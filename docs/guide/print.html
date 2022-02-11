@@ -119,7 +119,7 @@
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        <a href="https://github.com/rust-lang/mdBook/tree/master/guide" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/dioxuslabs/dioxus/tree/master/docs" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
 
@@ -269,7 +269,7 @@
 <pre><code>sudo apt install libwebkit2gtk-4.0-dev libgtk-3-dev libappindicator3-dev
 ```
 
-When distributing onto older Windows platforms or less-mainstream 
+When distributing onto older Windows platforms or less-mainstream
 
 
 
@@ -413,7 +413,7 @@ fn App(cx: Scope) -&gt; Element {
 </span>fn App(cx: Scope) -&gt; Element {
     cx.render(rsx! {
         div { &quot;Hello, world!&quot; }
-    })    
+    })
 }
 <span class="boring">}
 </span></code></pre></pre>
@@ -639,11 +639,11 @@ rsx! ( &quot;hello {name}&quot; )
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// settings.json 
+</span>// settings.json
 {
   &quot;rust-analyzer.diagnostics.disabled&quot;: [
     &quot;macro-error&quot;
-  ],   
+  ],
 }
 <span class="boring">}
 </span></code></pre></pre>
@@ -914,7 +914,7 @@ rsx!(
 </span>rsx!(
     ul {
         names.iter().map(|name| rsx!(
-            li { &quot;{name}&quot; } 
+            li { &quot;{name}&quot; }
         ))
     }
 )
@@ -1040,7 +1040,7 @@ rsx!(
 <span class="boring">}
 </span></code></pre></pre>
 <p>would actually render an output of </p>
-<pre><code class="language-html">&lt;div&gt;hello&lt;/div&gt; 
+<pre><code class="language-html">&lt;div&gt;hello&lt;/div&gt;
 </code></pre>
 <p>Notice how <code>hidden</code> is not present in the final output?</p>
 <p>Not all attributes work like this however. Only <em>these specific attributes</em> are whitelisted to have this behavior:</p>
@@ -1317,7 +1317,7 @@ fn TitleCard&lt;'a&gt;(cx: Scope&lt;'a, TitleCardProps&lt;'a&gt;&gt;) -&gt; Elem
     cx.render(rsx!{
         h1 { &quot;{cx.props.title}&quot; }
     })
-}   
+}
 <span class="boring">}
 </span></code></pre></pre>
 <p>For users of React: Dioxus knows <em>not</em> to memoize components that borrow property fields. By default, every component in Dioxus is memoized. This can be disabled by the presence of a non-<code>'static</code> borrow.</p>
@@ -1362,7 +1362,7 @@ fn TitleCard&lt;'a&gt;(cx: Scope&lt;'a, TitleCardProps&lt;'a&gt;&gt;) -&gt; Elem
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// this scope
-Scope&lt;()&gt; 
+Scope&lt;()&gt;
 
 // is the same as this scope
 Scope
@@ -1514,7 +1514,7 @@ fn TitleCard(cx: Scope&lt;TitleCardProps&gt;) -&gt; Element {
     cx.render(rsx!{
         h1 { &quot;{cx.props.title}&quot; }
     })
-}   
+}
 <span class="boring">}
 </span></code></pre></pre>
 <p>to:</p>
@@ -1526,7 +1526,7 @@ fn TitleCard(cx: Scope, title: String) -&gt; Element {
     cx.render(rsx!{
         h1 { &quot;{title}&quot; }
     })
-}   
+}
 <span class="boring">}
 </span></code></pre></pre>
 <p>Again, this macro is optional and should not be used by library authors since you have less fine-grained control over documentation and optionality.</p>
@@ -1552,27 +1552,27 @@ fn main() {
     dioxus::desktop::launch(App);
 }
 
-fn App(Scope) -&gt; Element {} 
+fn App(Scope) -&gt; Element {}
 
 #[derive(PartialEq, Props)]
 struct PostProps{}
-fn Post(Scope&lt;PostProps&gt;) -&gt; Element {} 
+fn Post(Scope&lt;PostProps&gt;) -&gt; Element {}
 
 #[derive(PartialEq, Props)]
 struct VoteButtonsProps {}
-fn VoteButtons(Scope&lt;VoteButtonsProps&gt;) -&gt; Element {} 
+fn VoteButtons(Scope&lt;VoteButtonsProps&gt;) -&gt; Element {}
 
 #[derive(PartialEq, Props)]
 struct TitleCardProps {}
-fn TitleCard(Scope&lt;TitleCardProps&gt;) -&gt; Element {} 
+fn TitleCard(Scope&lt;TitleCardProps&gt;) -&gt; Element {}
 
 #[derive(PartialEq, Props)]
 struct MetaCardProps {}
-fn MetaCard(Scope&lt;MetaCardProps&gt;) -&gt; Element {} 
+fn MetaCard(Scope&lt;MetaCardProps&gt;) -&gt; Element {}
 
 #[derive(PartialEq, Props)]
 struct ActionCardProps {}
-fn ActionCard(Scope&lt;ActionCardProps&gt;) -&gt; Element {} 
+fn ActionCard(Scope&lt;ActionCardProps&gt;) -&gt; Element {}
 </code></pre></pre>
 <p>That's a lot of components for one file! We've successfully refactored our app into components, but we should probably start breaking it up into a file for each component.</p>
 <h2 id="breaking-into-different-files"><a class="header" href="#breaking-into-different-files">Breaking into different files</a></h2>
@@ -1586,7 +1586,7 @@ use dioxus::prelude::*;
 
 #[derive(PartialEq, Props)]
 struct ActionCardProps {}
-fn ActionCard(Scope&lt;ActionCardProps&gt;) -&gt; Element {} 
+fn ActionCard(Scope&lt;ActionCardProps&gt;) -&gt; Element {}
 <span class="boring">}
 </span></code></pre></pre>
 <p>We should also create a <code>mod.rs</code> file in the <code>post</code> folder so we can use it from our <code>main.rs</code>. Our <code>Post</code> component and its props will go into this file.</p>
@@ -1622,7 +1622,7 @@ fn App(Scope) -&gt; Element {
             original_poster: &quot;me&quot;.to_string()
         }
     })
-} 
+}
 </code></pre></pre>
 <p>If you tried to build this app right now, you'll get an error message saying that <code>Post is private, trying changing it to public</code>. This is because we haven't properly exported our component! To fix this, we need to make sure both the Props and Component are declared as &quot;public&quot;:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -1634,7 +1634,7 @@ use dioxus::prelude::*;
 
 #[derive(PartialEq, Props)]
 pub struct PostProps {}
-pub fn Post(Scope&lt;PostProps&gt;) -&gt; Element {} 
+pub fn Post(Scope&lt;PostProps&gt;) -&gt; Element {}
 <span class="boring">}
 </span></code></pre></pre>
 <p>While we're here, we also need to make sure each of our subcomponents are included as modules and exported.</p>
@@ -1715,7 +1715,7 @@ fn App(Scope) -&gt; Element {
             original_poster: &quot;me&quot;.to_string()
         }
     })
-} 
+}
 </code></pre></pre>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -1769,7 +1769,7 @@ use dioxus::prelude::*;
 
 #[derive(PartialEq, Props)]
 pub struct VoteButtonsProps {}
-pub fn VoteButtons(Scope&lt;VoteButtonsProps&gt;) -&gt; Element {} 
+pub fn VoteButtons(Scope&lt;VoteButtonsProps&gt;) -&gt; Element {}
 <span class="boring">}
 </span></code></pre></pre>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -1780,7 +1780,7 @@ use dioxus::prelude::*;
 
 #[derive(PartialEq, Props)]
 pub struct TitleCardProps {}
-pub fn TitleCard(Scope&lt;TitleCardProps&gt;) -&gt; Element {} 
+pub fn TitleCard(Scope&lt;TitleCardProps&gt;) -&gt; Element {}
 <span class="boring">}
 </span></code></pre></pre>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -1791,7 +1791,7 @@ use dioxus::prelude::*;
 
 #[derive(PartialEq, Props)]
 pub struct MetaCardProps {}
-pub fn MetaCard(Scope&lt;MetaCardProps&gt;) -&gt; Element {} 
+pub fn MetaCard(Scope&lt;MetaCardProps&gt;) -&gt; Element {}
 <span class="boring">}
 </span></code></pre></pre>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -1802,7 +1802,7 @@ use dioxus::prelude::*;
 
 #[derive(PartialEq, Props)]
 pub struct ActionCardProps {}
-pub fn ActionCard(Scope&lt;ActionCardProps&gt;) -&gt; Element {} 
+pub fn ActionCard(Scope&lt;ActionCardProps&gt;) -&gt; Element {}
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="moving-forward-2"><a class="header" href="#moving-forward-2">Moving forward</a></h2>
@@ -1981,7 +1981,7 @@ struct ClickableProps&lt;'a&gt; {
 
 fn clickable(cx: Scope&lt;ClickableProps&gt;) -&gt; Element {
     cx.render(rsx!(
-        a { 
+        a {
             ..cx.props.attributes,
             &quot;Any link, anywhere&quot;
         }
@@ -2002,7 +2002,7 @@ struct ClickableProps&lt;'a&gt; {
 
 fn clickable(cx: Scope&lt;ClickableProps&gt;) -&gt; Element {
     cx.render(rsx!(
-        a { 
+        a {
             onclick: move |evt| cx.props.onclick.call(evt)
         }
     ))
@@ -2132,14 +2132,14 @@ struct PostListProps&lt;'a&gt; {
             url: String::from(&quot;dioxuslabs.com&quot;),
             title: String::from(&quot;Hello, world&quot;),
             original_poster: String::from(&quot;dioxus&quot;)
-        }        
+        }
     });
 
     cx.render(rsx!{
         Title { title: &amp;post.title }
         Score { score: &amp;post.score }
         // etc
-    })   
+    })
 }
 <span class="boring">}
 </span></code></pre></pre>
@@ -2176,7 +2176,7 @@ struct PostListProps&lt;'a&gt; {
             &quot;Generate a random post&quot;
         }
         Post { props: &amp;post }
-    })   
+    })
 }
 <span class="boring">}
 </span></code></pre></pre>

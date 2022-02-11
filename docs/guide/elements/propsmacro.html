@@ -118,7 +118,7 @@
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        <a href="https://github.com/rust-lang/mdBook/tree/master/guide" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/dioxuslabs/dioxus/tree/master/docs" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
                         <a href="https://github.com/rust-lang/mdBook/edit/master/guide/src/elements/propsmacro.md" title="Suggest an edit" aria-label="Suggest an edit">
@@ -164,7 +164,7 @@
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// this scope
-Scope&lt;()&gt; 
+Scope&lt;()&gt;
 
 // is the same as this scope
 Scope
@@ -316,7 +316,7 @@ fn TitleCard(cx: Scope&lt;TitleCardProps&gt;) -&gt; Element {
     cx.render(rsx!{
         h1 { &quot;{cx.props.title}&quot; }
     })
-}   
+}
 <span class="boring">}
 </span></code></pre></pre>
 <p>to:</p>
@@ -328,7 +328,7 @@ fn TitleCard(cx: Scope, title: String) -&gt; Element {
     cx.render(rsx!{
         h1 { &quot;{title}&quot; }
     })
-}   
+}
 <span class="boring">}
 </span></code></pre></pre>
 <p>Again, this macro is optional and should not be used by library authors since you have less fine-grained control over documentation and optionality.</p>
