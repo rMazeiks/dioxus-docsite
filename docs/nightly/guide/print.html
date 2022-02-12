@@ -1869,7 +1869,7 @@ struct ClickableProps&lt;'a&gt; {
     title: &amp;'a str
 }
 
-fn Clickable(cx: Scope&lt;ClickableProps&gt;) -&gt; Element {
+fn Clickable&lt;'a&gt;(cx: Scope&lt;'a, ClickableProps&gt;) -&gt; Element {
     cx.render(rsx!(
         a {
             href: &quot;{cx.props.href}&quot;
@@ -1903,7 +1903,7 @@ struct ClickableProps&lt;'a&gt; {
     body: Element&lt;'a&gt;
 }
 
-fn Clickable(cx: Scope&lt;ClickableProps&gt;) -&gt; Element {
+fn Clickable&lt;'a&gt;(cx: Scope&lt;'a, ClickableProps&lt;'a&gt;&gt;) -&gt; Element {
     cx.render(rsx!(
         a {
             href: &quot;{cx.props.href}&quot;,
@@ -1938,7 +1938,7 @@ struct ClickableProps&lt;'a&gt; {
     children: Element&lt;'a&gt;
 }
 
-fn Clickable(cx: Scope&lt;ClickableProps&gt;) -&gt; Element {
+fn Clickable&lt;'a&gt;(cx: Scope&lt;'a, ClickableProps&gt;) -&gt; Element {
     cx.render(rsx!(
         a {
             href: &quot;{cx.props.href}&quot;,
@@ -1968,7 +1968,7 @@ fn Clickable(cx: Scope&lt;ClickableProps&gt;) -&gt; Element {
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>fn clickable(cx: Scope&lt;ClickableProps&gt;) -&gt; Element {
+</span>fn clickable&lt;'a&gt;(cx: Scope&lt;'a, ClickableProps&gt;) -&gt; Element {
     match cx.props.children {
         Some(VNode::Text(text)) =&gt; {
             // ...
@@ -2025,7 +2025,7 @@ struct ClickableProps&lt;'a&gt; {
     onclick: EventHandler&lt;'a, MouseEvent&gt;
 }
 
-fn clickable(cx: Scope&lt;ClickableProps&gt;) -&gt; Element {
+fn clickable&lt;'a&gt;(cx: Scope&lt;'a, ClickableProps&gt;) -&gt; Element {
     cx.render(rsx!(
         a {
             onclick: move |evt| cx.props.onclick.call(evt)
