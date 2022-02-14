@@ -102,7 +102,8 @@ export class Interpreter {
   SetAttribute(root, field, value, ns) {
     const name = field;
     const node = this.nodes[root];
-    if (ns == "style") {
+    console.log(ns);
+    if (ns === "style") {
       // @ts-ignore
       node.style[name] = value;
     } else if (ns != null || ns != undefined) {
@@ -110,7 +111,7 @@ export class Interpreter {
     } else {
       switch (name) {
         case "value":
-          if (value != node.value) {
+          if (value !== node.value) {
             node.value = value;
           }
           break;
@@ -125,7 +126,7 @@ export class Interpreter {
           break;
         default:
           // https://github.com/facebook/react/blob/8b88ac2592c5f555f315f9440cbb665dd1e7457a/packages/react-dom/src/shared/DOMProperty.js#L352-L364
-          if (value == "false" && bool_attrs.hasOwnProperty(name)) {
+          if (value === "false" && bool_attrs.hasOwnProperty(name)) {
             node.removeAttribute(name);
           } else {
             node.setAttribute(name, value);
@@ -142,7 +143,7 @@ export class Interpreter {
       node.checked = false;
     } else if (name === "selected") {
       node.selected = false;
-    } else if (name == "dangerous_inner_html") {
+    } else if (name === "dangerous_inner_html") {
       node.innerHTML = "";
     } else {
       node.removeAttribute(name);
@@ -200,10 +201,10 @@ export class Interpreter {
               `dioxus-prevent-default`
             );
 
-            if (event.type == "click") {
+            if (event.type === "click") {
               // todo call prevent default if it's the right type of event
               if (shouldPreventDefault !== `onclick`) {
-                if (target.tagName == "A") {
+                if (target.tagName === "A") {
                   event.preventDefault();
                   const href = target.getAttribute("href");
                   if (href !== "" && href !== null && href !== undefined) {
@@ -213,7 +214,7 @@ export class Interpreter {
               }
 
               // also prevent buttons from submitting
-              if (target.tagName == "BUTTON") {
+              if (target.tagName === "BUTTON") {
                 event.preventDefault();
               }
             }
@@ -237,16 +238,16 @@ export class Interpreter {
             if (shouldPreventDefault === `on${event.type}`) {
               event.preventDefault();
             }
-            if (event.type == "submit") {
+            if (event.type === "submit") {
               event.preventDefault();
             }
 
-            if (target.tagName == "FORM") {
+            if (target.tagName === "FORM") {
               for (let x = 0; x < target.elements.length; x++) {
                 let element = target.elements[x];
                 let name = element.getAttribute("name");
                 if (name != null) {
-                  if (element.getAttribute("type") == "checkbox") {
+                  if (element.getAttribute("type") === "checkbox") {
                     // @ts-ignore
                     contents.values[name] = element.checked ? "true" : "false";
                   } else {
@@ -349,7 +350,7 @@ export function serialize_event(event) {
     case "submit": {
       let target = event.target;
       let value = target.value ?? target.textContent;
-      if (target.type == "checkbox") {
+      if (target.type === "checkbox") {
         value = target.checked ? "true" : "false";
       }
       return {
