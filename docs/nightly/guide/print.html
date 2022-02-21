@@ -508,7 +508,7 @@ Hello, world!
 <pre><code class="language-toml">[package]
 name = &quot;hello-dioxus&quot;
 version = &quot;0.1.0&quot;
-edition = &quot;2018&quot;
+edition = &quot;2021&quot;
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -527,10 +527,10 @@ edition = &quot;2018&quot;
 
 
 fn main() {
-    dioxus::desktop::launch(App);
+    dioxus::desktop::launch(app);
 }
 
-fn App(cx: Scope) -&gt; Element {
+fn app(cx: Scope) -&gt; Element {
     cx.render(rsx! (
         div { &quot;Hello, world!&quot; }
     ))
@@ -548,14 +548,14 @@ fn App(cx: Scope) -&gt; Element {
 </span></code></pre></pre>
 <p>This initialization code launches a Tokio runtime on a helper thread where your code will run. Then, the WebView renderer will be launched on the main-thread. Due to platform requirements, the main thread is blocked by your app's event loop.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">fn main() {
-    dioxus::desktop::launch(App);
+    dioxus::desktop::launch(app);
 }
 </code></pre></pre>
 <p>Finally, our app. Every component in Dioxus is a function that takes in <code>Context</code> and <code>Props</code> and returns an <code>Element</code>.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>fn App(cx: Scope) -&gt; Element {
+</span>fn app(cx: Scope) -&gt; Element {
     cx.render(rsx! {
         div { &quot;Hello, world!&quot; }
     })
