@@ -428,6 +428,10 @@ Resize observer</li>
 <p>Webview Linux apps require WebkitGtk. When distributing, this can be part of your dependency tree in your <code>.rpm</code> or <code>.deb</code>. However, it's very likely that your users will already have WebkitGtk.</p>
 <pre><code>sudo apt install libwebkit2gtk-4.0-dev libgtk-3-dev libappindicator3-dev
 </code></pre>
+<p>When using Debian/bullseye <code>libappindicator3-dev</code> is no longer available but replaced by <code>libayatana-appindicator3-dev</code>.</p>
+<pre><code># on Debian/bullseye use:
+sudo apt install libwebkit2gtk-4.0-dev libgtk-3-dev libayatanta-appindicator3-dev
+</code></pre>
 <p>If you run into issues, make sure you have all the basics installed, as outlined in the <a href="https://tauri.studio/en/docs/get-started/setup-linux">Tauri docs</a>.</p>
 <h3 id="macos"><a class="header" href="#macos">macOS</a></h3>
 <p>Currently - everything for macOS is built right in! However, you might run into an issue if you're using nightly Rust due to some permissions issues in our Tao dependency (which have been resolved but not published).</p>
@@ -520,6 +524,10 @@ edition = &quot;2021&quot;
 <pre><code class="language-shell">$ cargo add dioxus --features desktop
 </code></pre>
 <p>It's very important to add <code>dioxus</code> with the <code>desktop</code> feature for this example. The <code>dioxus</code> crate is a batteries-include crate that combines a bunch of utility crates together, ensuring compatibility of the most important parts of the ecosystem. Under the hood, the <code>dioxus</code> crate configures various renderers, hooks, debug tooling, and more. The <code>desktop</code> feature ensures the we only depend on the smallest set of required crates to compile and render.</p>
+<p>If you system does not provide the <code>libappindicator3</code> library, like Debian/bullseye, you can enable the replacement <code>ayatana</code> with an additional flag:</p>
+<pre><code class="language-shell">$ # On Debian/bullseye use:
+$ cargo add dioxus --features desktop --features ayatana
+</code></pre>
 <p>If you plan to develop extensions for the <code>Dioxus</code> ecosystem, please use the <code>dioxus</code> crate with the <code>core</code> feature to limit the amount of dependencies your project brings in.</p>
 <h3 id="our-first-app"><a class="header" href="#our-first-app">Our first app</a></h3>
 <p>Now, let's edit our <code>main.rs</code> file:</p>
