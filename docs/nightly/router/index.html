@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Chapter 1 - Dioxus Router</title>
+        <title>Introduction - Dioxus Router</title>
                 
 
         <!-- Custom HTML head -->
@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Chapter 1</a></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="guide/index.html"><strong aria-hidden="true">2.</strong> Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="guide/getting-started.html"><strong aria-hidden="true">2.1.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="guide/first-route.html"><strong aria-hidden="true">2.2.</strong> Creating Our First Route</a></li><li class="chapter-item expanded "><a href="guide/building-a-nest.html"><strong aria-hidden="true">2.3.</strong> Building a Nest</a></li><li class="chapter-item expanded "><a href="guide/redirection-perfection.html"><strong aria-hidden="true">2.4.</strong> Redirection Perfection</a></li></ol></li><li class="chapter-item expanded "><a href="reference/index.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> X</div></li></ol></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -143,14 +143,22 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-1"><a class="header" href="#chapter-1">Chapter 1</a></h1>
-<p>The Dioxus Router is very important!!</p>
+                        <h1 id="dioxus-router-introduction"><a class="header" href="#dioxus-router-introduction">Dioxus Router: Introduction</a></h1>
+<p>Whether or not you're building a website, desktop app, or mobile app, organizing your app's views into &quot;pages&quot; can be an effective method for organization and maintainability. </p>
+<p>Dioxus comes with a router built-in. To start utilizing Dioxus Router, enable the <code>router</code> feature in your <code>Cargo.toml</code> file.</p>
+<pre><code class="language-toml">[dependencies]
+dioxus = { version = &quot;x.x.x&quot;, features = [.., &quot;router&quot;] }
+</code></pre>
+<p>In this book you'll find a short <a href="./guide/index.html">guide</a> to get up to speed with Dioxus Router, as well as the router's <a href="./reference/index.html">reference</a>.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                                                    <a rel="next" href="guide/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
                         <div style="clear: both"></div>
                     </nav>
@@ -159,6 +167,9 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                                    <a rel="next" href="guide/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                             </nav>
 
         </div>

@@ -3,8 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Dioxus Router</title>
-                <meta name="robots" content="noindex" />
+        <title>Building a Nest - Dioxus Router</title>
                 
 
         <!-- Custom HTML head -->
@@ -15,21 +14,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-                <link rel="icon" href="favicon.svg">
-                        <link rel="shortcut icon" href="favicon.png">
-                <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-                <link rel="stylesheet" href="css/print.css" media="print">
+                <link rel="icon" href="../favicon.svg">
+                        <link rel="shortcut icon" href="../favicon.png">
+                <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+                <link rel="stylesheet" href="../css/print.css" media="print">
         
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-                <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+                <link rel="stylesheet" href="../fonts/fonts.css">
         
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -37,7 +36,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -83,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="guide/index.html"><strong aria-hidden="true">2.</strong> Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="guide/getting-started.html"><strong aria-hidden="true">2.1.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="guide/first-route.html"><strong aria-hidden="true">2.2.</strong> Creating Our First Route</a></li><li class="chapter-item expanded "><a href="guide/building-a-nest.html"><strong aria-hidden="true">2.3.</strong> Building a Nest</a></li><li class="chapter-item expanded "><a href="guide/redirection-perfection.html"><strong aria-hidden="true">2.4.</strong> Redirection Perfection</a></li></ol></li><li class="chapter-item expanded "><a href="reference/index.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> X</div></li></ol></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../guide/index.html"><strong aria-hidden="true">2.</strong> Guide</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../guide/getting-started.html"><strong aria-hidden="true">2.1.</strong> Getting Started</a></li><li class="chapter-item expanded "><a href="../guide/first-route.html"><strong aria-hidden="true">2.2.</strong> Creating Our First Route</a></li><li class="chapter-item expanded "><a href="../guide/building-a-nest.html" class="active"><strong aria-hidden="true">2.3.</strong> Building a Nest</a></li><li class="chapter-item expanded "><a href="../guide/redirection-perfection.html"><strong aria-hidden="true">2.4.</strong> Redirection Perfection</a></li></ol></li><li class="chapter-item expanded "><a href="../reference/index.html"><strong aria-hidden="true">3.</strong> Reference</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> X</div></li></ol></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -115,7 +114,7 @@
                     <h1 class="menu-title">Dioxus Router</h1>
 
                     <div class="right-buttons">
-                                                <a href="print.html" title="Print this book" aria-label="Print this book">
+                                                <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                                                                         
@@ -144,162 +143,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="dioxus-router-introduction"><a class="header" href="#dioxus-router-introduction">Dioxus Router: Introduction</a></h1>
-<p>Whether or not you're building a website, desktop app, or mobile app, organizing your app's views into &quot;pages&quot; can be an effective method for organization and maintainability. </p>
-<p>Dioxus comes with a router built-in. To start utilizing Dioxus Router, enable the <code>router</code> feature in your <code>Cargo.toml</code> file.</p>
-<pre><code class="language-toml">[dependencies]
-dioxus = { version = &quot;x.x.x&quot;, features = [.., &quot;router&quot;] }
-</code></pre>
-<p>In this book you'll find a short <a href="./guide/index.html">guide</a> to get up to speed with Dioxus Router, as well as the router's <a href="./reference/index.html">reference</a>.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="dioxus-router-guide"><a class="header" href="#dioxus-router-guide">Dioxus Router: Guide</a></h1>
-<p>In this guide you'll learn to effectively use Dioxus Router whether you're building a small todo app or the next FAANG company. We will create a small website with a blog, homepage, and more!</p>
-<h4 id="youll-learn-how-to"><a class="header" href="#youll-learn-how-to">You'll learn how to</a></h4>
-<ul>
-<li>Create routes and render &quot;pages&quot;.</li>
-<li>Utilize nested routes, create a navigation bar, and render content for a set of routes.</li>
-<li>Gather URL parameters to dynamically display content.</li>
-<li>Redirect your visitors wherever you want.</li>
-</ul>
-<blockquote>
-<p>Disclaimer</p>
-<p>This site will only display the features of Dioxus Router. It will not include any actual functionality. To keep things simple we will only be using a single file, this is not the recommended way of doing things with a real application.</p>
-</blockquote>
-<p>You can find the complete application <a href="https://github.com/DogeDark/dioxus-router-example">here</a>.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
-<p>Before we start utilizing Dioxus Router, we need to initialize a Dioxus web application.</p>
-<h4 id="required-tools"><a class="header" href="#required-tools">Required Tools</a></h4>
-<p>If you haven't already, make sure you install the <a href="https://trunkrs.dev/">trunk</a> build tool and the rust <code>wasm32-unknown-unknown</code> target:</p>
-<pre><code>$ cargo install trunk
-    ...
-$ rustup target add wasm32-unkown-unknown
-    ...
-</code></pre>
-<h3 id="creating-the-project"><a class="header" href="#creating-the-project">Creating the Project</a></h3>
-<p>First, create a new cargo binary project:</p>
-<pre><code>cargo new --bin dioxus-blog
-</code></pre>
-<p>Next, we need to add dioxus with the web and router feature to our <code>Cargo.toml</code> file.</p>
-<pre><code class="language-toml">[package]
-name = &quot;dioxus-blog&quot;
-version = &quot;0.1.0&quot;
-edition = &quot;2021&quot;
-
-[dependencies]
-dioxus = { version = &quot;0.1.8&quot;, features = [&quot;web&quot;, &quot;router&quot;] }
-</code></pre>
-<p>Now we can start coding! Create an <code>index.html</code> file in the root of your project:</p>
-<pre><code class="language-html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;Dioxus Blog&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;div id=&quot;main&quot;&gt;&lt;/div&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>You can add whatever you want to this file, just ensure that you have a <code>div</code> with the id of <code>main</code> in the root of your body element. This is essentially a handle to where Dioxus will render your components.</p>
-<p>Now move to <code>src/main.rs</code> and replace its contents with:</p>
-<pre><code class="language-rs">use dioxus::prelude::*;
-
-fn main() {
-    // Launch Dioxus web app
-    dioxus::web::launch(app);
-}
-
-// Our root component.
-fn app(cx: Scope) -&gt; Element {
-    // Render &quot;Hello, wasm!&quot; to the screen.
-    cx.render(rsx! {
-        p { &quot;Hello, wasm!&quot;}
-    })
-}
-</code></pre>
-<p>Our project is now setup! To make sure everything is running correctly, in the root of your project run:</p>
-<pre><code>trunk serve
-</code></pre>
-<p>Then head to <a href="http://localhost:8080">http://localhost:8080</a> in your browser, and you should see <code>Hello, wasm!</code> on your screen.</p>
-<h4 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h4>
-<p>We setup a new project with Dioxus and got everything running correctly. Next we'll create a small homepage and start our journey with Dioxus Router.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="creating-our-first-route"><a class="header" href="#creating-our-first-route">Creating Our First Route</a></h1>
-<p>In this chapter, we will continue off of our new Dioxus project to create a homepage and start utilizing Dioxus Router!</p>
-<h3 id="fundamentals"><a class="header" href="#fundamentals">Fundamentals</a></h3>
-<p>Dioxus Router works based on a router and route component. If you've ever used <a href="https://reactrouter.com/">React Router</a>, you should feel at home with Dioxus Router.</p>
-<p>To get started, import the <code>Router</code> and <code>Route</code> components.</p>
-<pre><code class="language-rs">use dioxus::{
-    prelude::*,
-    router::{Route, Router}
-}
-</code></pre>
-<p>We also need an actual page to route to! Add a homepage component:</p>
-<pre><code class="language-rs">fn homepage(cx: Scope) -&gt; Element {
-    cx.render(rsx! {
-        p { &quot;Welcome to Dioxus Blog!&quot; }
-    })
-}
-</code></pre>
-<h3 id="to-route-or-not-to-route"><a class="header" href="#to-route-or-not-to-route">To Route or Not to Route</a></h3>
-<p>We want to use Dioxus Router to seperate our application into different &quot;pages&quot;. Dioxus Router will then determine which page to render based on the URL path.</p>
-<p>To start using Dioxus Router, we need to use the <code>Router</code> component.
-Replace the <code>p { &quot;Hello, wasm!&quot; }</code> in your <code>app</code> component with a Router component:</p>
-<pre><code class="language-rs">fn app(cx: Scope) -&gt; Element {
-    cx.render(rsx! {
-        Router {} // NEW
-    })
-}
-</code></pre>
-<p>Now we have established a router and we can create our first route. We will be creating a route for our homepage component we created earlier.</p>
-<pre><code class="language-rs">fn app(cx: Scope) -&gt; Element {
-    cx.render(rsx! {
-        Router {
-            Route { to: &quot;/&quot;, self::homepage {}} // NEW
-        }
-    })
-}
-</code></pre>
-<p>If you head to your application's browser tab, you should see the text <code>Welcome to Dioxus Blog!</code> when on the root URL (<code>http://localhost:8080/</code>). If you enter a different path for the URL, nothing should be displayed.</p>
-<p>This is because we told Dioxus Router to render the <code>homepage</code> component only when the URL path is <code>/</code>. You can tell Dioxus Router to render any kind of component such as a <code>div {}</code>.</p>
-<h3 id="what-if-a-route-doesnt-exist"><a class="header" href="#what-if-a-route-doesnt-exist">What if a Route Doesn't Exist?</a></h3>
-<p>In our example Dioxus Router doesn't render anything. If we wanted to, we could tell Dioxus Router to render a component all the time! Try it out:</p>
-<pre><code class="language-rs">fn app(cx: Scope) -&gt; Element {
-    cx.render(rsx! {
-        Router {
-            p { &quot;-- Dioxus Blog --&quot; } // NEW
-            Route { to: &quot;/&quot;, self::homepage {}}
-        }
-    })
-}
-</code></pre>
-<p>We will go into more detail about this in the next chapter.</p>
-<p>Many sites also have a &quot;404&quot; page for when a URL path leads to nowhere. Dioxus Router can do this too! Create a new <code>page_not_found</code> component.</p>
-<pre><code class="language-rs">fn page_not_found(cx: Scope) -&gt; Element {
-    cx.render(rsx! {
-        p { &quot;Oops! The page you are looking for doesn't exist!&quot; }
-    })
-}
-</code></pre>
-<p>Now to tell Dioxus Router to render our new component when no route exists. Create a new route with a path of nothing:</p>
-<pre><code class="language-rs">fn app(cx: Scope) -&gt; Element {
-    cx.render(rsx! {
-        Router {
-            p { &quot;-- Dioxus Blog --&quot; }
-            Route { to: &quot;/&quot;, self::homepage {}}
-            Route { to: &quot;&quot;, self::page_not_found {}} // NEW
-        }
-    })
-}
-</code></pre>
-<p>Now when you go to a route that doesn't exist, you should see the page not found text and the text we told Dioxus Router to render all the time.</p>
-<pre><code>// localhost:8080/abc
-
--- Dioxus Blog --
-Oops! The page you are looking for doesn't exist!
-</code></pre>
-<blockquote>
-<p>Make sure you put your empty route at the bottom or else it'll override any routes below it!</p>
-</blockquote>
-<h3 id="conclusion-1"><a class="header" href="#conclusion-1">Conclusion</a></h3>
-<p>In this chapter we learned how to create a route and tell Dioxus Router what component to render when the URL path is equal to what we specified. We also created a 404 page to handle when a route doesn't exist. Next, we'll create the blog portion of our site. We will utilize nested routes and URL parameters.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="building-a-nest"><a class="header" href="#building-a-nest">Building a Nest</a></h1>
+                        <h1 id="building-a-nest"><a class="header" href="#building-a-nest">Building a Nest</a></h1>
 <p>Not a bird's nest! A nest of routes!</p>
 <p>In this chapter we will begin to build the blog portion of our site which will include links, nested URLs, and URL parameters. We will also explore the use case of rendering components outside of routes.</p>
 <h3 id="site-navigation"><a class="header" href="#site-navigation">Site Navigation</a></h3>
@@ -477,62 +321,20 @@ The <code>segment</code> method also parses the parameter into any type for us. 
 }
 </code></pre>
 <p>That's it! If you head to <code>/blog/foo</code> you should see <code>Welcome to the foo blog post!</code>.</p>
-<h3 id="conclusion-2"><a class="header" href="#conclusion-2">Conclusion</a></h3>
+<h3 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h3>
 <p>In this chapter we utilized Dioxus Router's Link, URL Parameter, and <code>use_route</code> functionality to build the blog portion of our application. In the next and final chapter, we will go over the <code>Redirect</code> component to redirect non-authorized users to another page.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="redirection-perfection"><a class="header" href="#redirection-perfection">Redirection Perfection</a></h1>
-<p>You're well on your way to becoming a routing master!</p>
-<p>In this chapter we will cover utilizing the <code>Redirect</code> component so you can take Rickrolling to the next level. We will also provide some optional challenges at the end if you want to continue your practice with not only Dioxus Router but with Dioxus in general.</p>
-<h3 id="what-is-this-redirect-thing"><a class="header" href="#what-is-this-redirect-thing">What Is This Redirect Thing?</a></h3>
-<p>The <code>Redirect</code> component is simple! When Dioxus determines that it should be rendered, it will redirect your application visitor to wherever you want. 
-In this example, let's say that you added a secret page to your site but didn't have time to program in the permission system. As a quick fix you add a redirect.</p>
-<p>As always, let's first create a new component named <code>secret_page</code>.</p>
-<pre><code class="language-rs">fn secret_page(cx: Scope) -&gt; Element {
-    cx.render(rsx! {
-        p { &quot;This page is not to be viewed!&quot; }
-    })
-}
-</code></pre>
-<p>To redirect our visitors, all we have to do is render the <code>Redirect</code> component. The <code>Redirect</code> component is very similar to the <code>Link</code> component. The main difference is it doesn't display anything new.
-First import the <code>Redirect</code> component and then update your <code>secret_page</code> component:</p>
-<pre><code class="language-rs">use dioxus::{
-    prelude::*,
-    router::{use_route, Link, Redirect, Route, Router}, // UPDATED
-};
-
-...
-
-fn secret_page(cx: Scope) -&gt; Element {
-    cx.render(rsx! {
-        p { &quot;This page is not to be viewed!&quot; }
-        Redirect { to: &quot;/&quot; } // NEW
-    })
-}
-</code></pre>
-<p>That's it! Now your users will be redirected away from the secret page.</p>
-<blockquote>
-<p>Similar to the <code>Link</code> component, the <code>Redirect</code> component needs to be explicitly set to redirect to an external site. To link to external sites, add the <code>external: true</code> property.</p>
-<pre><code class="language-rs">Redirect { to: &quot;https://github.com&quot;, external: true}
-</code></pre>
-</blockquote>
-<h3 id="conclusion-3"><a class="header" href="#conclusion-3">Conclusion</a></h3>
-<p>Well done! You've completed the Dioxus Router guide book. You've built a small application and learned about the many things you can do with Dioxus Router. To continue your journey, you can find a list of challenges down below, or you can check out the <a href="guide/../reference/index.html">reference</a>.</p>
-<h3 id="challenges"><a class="header" href="#challenges">Challenges</a></h3>
-<ul>
-<li>Organize your components into seperate files for better maintainability.</li>
-<li>Give your app some style if you haven't already.</li>
-<li>Build an about page so your visitors know who you are.</li>
-<li>Add a user system that uses URL parameters.</li>
-<li>Create a simple admin system to create, delete, and edit blogs.</li>
-<li>If you want to go to the max, hook up your application to a rest API and database.</li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="dioxus-router-reference"><a class="header" href="#dioxus-router-reference">Dioxus Router: Reference</a></h1>
-<p>This section includes a reference to Dioxus Router's API and functionality.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                                                    <a rel="prev" href="../guide/first-route.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
                         
+                                                    <a rel="next" href="../guide/redirection-perfection.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
                         <div style="clear: both"></div>
                     </nav>
@@ -540,7 +342,13 @@ fn secret_page(cx: Scope) -&gt; Element {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                                    <a rel="prev" href="../guide/first-route.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
                 
+                                    <a rel="next" href="../guide/redirection-perfection.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                             </nav>
 
         </div>
@@ -553,21 +361,16 @@ fn secret_page(cx: Scope) -&gt; Element {
         </script>
         
         
-                <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+                <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
         
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
         
-                        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
-                
+        
     </body>
 </html>
