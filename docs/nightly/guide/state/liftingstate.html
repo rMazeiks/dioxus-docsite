@@ -253,7 +253,7 @@ fn Title&lt;'a&gt;(cx: Scope&lt;'a&gt;, text: &amp;'a str) -&gt; Element {
 <span class="boring">}
 </span></code></pre></pre>
 <p>This is great - all is well in the world. We get precise updates, automatic memoization, and a solid abstraction. But, what happens when we want to reuse this component in another project? This component is now deeply intertwined with our global state - which might not be the same in another app.</p>
-<p>In this case, we want to &quot;lift&quot; our global state out of &quot;view&quot; components.  With <code>lifting</code>, our individual components at &quot;leaf&quot; position of our VirtualDom are &quot;pure&quot;, making them easily reusable, testable, and deterministic. For instance, the &quot;title&quot; bar of our app might be a fairly complicated component.</p>
+<p>In this case, we want to &quot;lift&quot; our global state out of &quot;view&quot; components.  With <code>lifting</code>, our individual components at &quot;leaf&quot; position of our VirtualDom are &quot;pure&quot;, making them easily reusable, testable, and deterministic.</p>
 <p>To enable our title component to be used across apps, we want to lift our atoms upwards and out of the Title component. We would organize a bunch of other components in this section of the app to share some of the same state.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]

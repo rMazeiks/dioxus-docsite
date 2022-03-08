@@ -3405,7 +3405,7 @@ fn Title&lt;'a&gt;(cx: Scope&lt;'a&gt;, text: &amp;'a str) -&gt; Element {
 <span class="boring">}
 </span></code></pre></pre>
 <p>This is great - all is well in the world. We get precise updates, automatic memoization, and a solid abstraction. But, what happens when we want to reuse this component in another project? This component is now deeply intertwined with our global state - which might not be the same in another app.</p>
-<p>In this case, we want to &quot;lift&quot; our global state out of &quot;view&quot; components.  With <code>lifting</code>, our individual components at &quot;leaf&quot; position of our VirtualDom are &quot;pure&quot;, making them easily reusable, testable, and deterministic. For instance, the &quot;title&quot; bar of our app might be a fairly complicated component.</p>
+<p>In this case, we want to &quot;lift&quot; our global state out of &quot;view&quot; components.  With <code>lifting</code>, our individual components at &quot;leaf&quot; position of our VirtualDom are &quot;pure&quot;, making them easily reusable, testable, and deterministic.</p>
 <p>To enable our title component to be used across apps, we want to lift our atoms upwards and out of the Title component. We would organize a bunch of other components in this section of the app to share some of the same state.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -3578,7 +3578,28 @@ static INPUT_ERROR: Atom&lt;InputError&gt; = |_| InputError::None;
 <p>This approach to error handling is best in apps that have &quot;well defined&quot; error states. Consider using a crate like <code>thiserror</code> or <code>anyhow</code> to simplify the generation of the error types.</p>
 <p>This pattern is widely popular in many contexts and is particularly helpful whenever your code generates a non-recoverable error. You can gracefully capture these &quot;global&quot; error states without panicking or mucking up state.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="helper-crates"><a class="header" href="#helper-crates">Helper Crates</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="fermi"><a class="header" href="#fermi">Fermi</a></h1>
+<p>Because the Dioxus ecosystem is fairly young, there aren't a ton of third-party libraries designed to &quot;get things done.&quot; That's where the Dioxus helper crates come in. These are officially supported crates built on top of existing libraries to solve some of the common barriers to building apps.</p>
+<h2 id="router"><a class="header" href="#router">Router</a></h2>
+<p>Quickly add a cross-platform router to structure your app.</p>
+<p>https://github.com/DioxusLabs/dioxus/tree/master/packages/router</p>
+<h2 id="fermi"><a class="header" href="#fermi">Fermi</a></h2>
+<p>Global state as easy as <code>use_state</code>.</p>
+<p>https://github.com/DioxusLabs/dioxus/tree/master/packages/fermi</p>
+<h2 id="query"><a class="header" href="#query">Query</a></h2>
+<p>This crate has yet to be developed! However, we do plan on providing a crate for good fetching and query support.</p>
+<h2 id="3rd-party---toast"><a class="header" href="#3rd-party---toast">3rd-party - Toast</a></h2>
+<p>Toast notifications, curtesy of <a href="https://github.com/mrxiaozhuox">@mrxiaozhuox</a>.</p>
+<p>https://github.com/mrxiaozhuox/dioxus-toast</p>
+<h2 id="3rd-party---heroicon"><a class="header" href="#3rd-party---heroicon">3rd-party - HeroIcon</a></h2>
+<p>Collection of helpful hero icons, curtesy of <a href="https://github.com/autarch">@autarch</a>.</p>
+<p>https://github.com/houseabsolute/dioxus-heroicons</p>
+<h2 id="3rd-party---katex"><a class="header" href="#3rd-party---katex">3rd-party - Katex</a></h2>
+<p>Draw beautiful equations, curtesy of <a href="https://github.com/oovm">@oovm</a></p>
+<p>https://github.com/oovm/katex-wasm/tree/dev/projects/dioxus-katex</p>
+<h2 id="3rd-party---primsjs"><a class="header" href="#3rd-party---primsjs">3rd-party - PrimsJS</a></h2>
+<p>Highlight your code blocks with ease, curtesy of <a href="https://github.com/oovm">@oovm</a></p>
+<p>https://github.com/oovm/katex-wasm/tree/dev/projects/dioxus-katex</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fermi-1"><a class="header" href="#fermi-1">Fermi</a></h1>
 <p>After having covered local and global state, you're definitely ready to start building some complex Dioxus apps. Before you get too far, check out the Fermi crate. Fermi makes it dead-easy to manage global state and scales to the largest of apps.</p>
 <h2 id="what-is-fermi-for"><a class="header" href="#what-is-fermi-for">What is Fermi for?</a></h2>
 <p>If you're building an app that has scaled past a few small components, then it'll be worth sketching out and organizing your app's state. Fermi makes it easy to transition from a simple app that relies on <code>use_state</code> to an app with dozens of components.</p>
@@ -3677,7 +3698,7 @@ fn Todo(cx: Scope, id: Uuid) -&gt; Element {
 <h2 id="future-reading"><a class="header" href="#future-reading">Future Reading</a></h2>
 <p>This guide is meant just to be an overview of Fermi. This page is just a short advertisement for what we consider the best state management solution available today for Dioxus apps.</p>
 <p>For further reading, check out the <a href="https://github.com/DioxusLabs/dioxus/tree/master/packages/fermi">crate itself</a>!</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="router"><a class="header" href="#router">Router</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="router-1"><a class="header" href="#router-1">Router</a></h1>
 <p>In many of your apps, you'll want to have different &quot;scenes&quot;. For a webpage, these scenes might be the different webpages with their own content.</p>
 <p>You could write your own scene management solution - quite simply too. However, to save you the effort, Dioxus supports a first-party solution for scene management called Dioxus Router.</p>
 <h2 id="what-is-it"><a class="header" href="#what-is-it">What is it?</a></h2>
