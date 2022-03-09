@@ -280,17 +280,17 @@ fn Banner(cx: Scope) -&gt; Element {
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>enum SyncMsg {
+</span>enum SyncAction {
     SetUsername(String),
 }
 
-async fn sync_service(mut rx: UnboundedReceiver&lt;SyncMsg&gt;, atoms: AtomRoot) {
+async fn sync_service(mut rx: UnboundedReceiver&lt;SyncAction&gt;, atoms: AtomRoot) {
     let username = atoms.write(USERNAME);
     let errors = atoms.write(ERRORS);
 
     while let Ok(msg) = rx.next().await {
         match msg {
-            SyncMsg::SetUsername(name) =&gt; {
+            SyncAction::SetUsername(name) =&gt; {
                 if set_name_on_server(&amp;name).await.is_ok() {
                     username.set(name);
                 } else {
@@ -304,8 +304,33 @@ async fn sync_service(mut rx: UnboundedReceiver&lt;SyncMsg&gt;, atoms: AtomRoot)
 </span></code></pre></pre>
 <h2 id="yielding-values"><a class="header" href="#yielding-values">Yielding Values</a></h2>
 <p>To yield values from a coroutine, simply bring in a <code>UseState</code> handle and set the value whenever your coroutine completes its work.</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let sync_status = use_state(&amp;cx, || Status::Launching);
+let sync_task = use_coroutine(&amp;cx, |rx: UnboundedReceiver&lt;SyncAction&gt;| {
+    to_owned![sync_status];
+    async move {
+        loop {
+            delay_ms(1000).await;
+            sync_status.set(Status::Working);
+        }
+    }
+})
+<span class="boring">}
+</span></code></pre></pre>
 <h2 id="automatic-injection-into-the-context-api"><a class="header" href="#automatic-injection-into-the-context-api">Automatic injection into the Context API</a></h2>
 <p>Coroutine handles are automatically injected through the context API. <code>use_coroutine_handle</code> with the message type as a generic can be used to fetch a handle.</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn Child(cx: Scope) -&gt; Element {
+    let sync_task = use_coroutine_handle::&lt;SyncAction&gt;(&amp;cx);
+
+    sync_task.send(SyncAction::SetUsername);
+}
+<span class="boring">}
+</span></code></pre></pre>
 
                     </main>
 
