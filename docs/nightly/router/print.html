@@ -168,8 +168,8 @@ dioxus = { version = &quot;x.x.x&quot;, features = [.., &quot;router&quot;] }
 <div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting Started</a></h1>
 <p>Before we start utilizing Dioxus Router, we need to initialize a Dioxus web application.</p>
 <h4 id="required-tools"><a class="header" href="#required-tools">Required Tools</a></h4>
-<p>If you haven't already, make sure you install the <a href="https://trunkrs.dev/">trunk</a> build tool and the rust <code>wasm32-unknown-unknown</code> target:</p>
-<pre><code>$ cargo install trunk
+<p>If you haven't already, make sure you install the <a href="https://dioxuslabs.com/nightly/cli/">dioxus-cli</a> build tool and the rust <code>wasm32-unknown-unknown</code> target:</p>
+<pre><code>$ cargo install dioxus-cli
     ...
 $ rustup target add wasm32-unkown-unknown
     ...
@@ -215,7 +215,7 @@ fn app(cx: Scope) -&gt; Element {
 }
 </code></pre>
 <p>Our project is now setup! To make sure everything is running correctly, in the root of your project run:</p>
-<pre><code>trunk serve
+<pre><code>dioxus serve --platform web
 </code></pre>
 <p>Then head to <a href="http://localhost:8080">http://localhost:8080</a> in your browser, and you should see <code>Hello, wasm!</code> on your screen.</p>
 <h4 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h4>
