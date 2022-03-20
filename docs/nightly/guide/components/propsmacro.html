@@ -278,7 +278,7 @@ fn TitleCard&lt;'a&gt;(cx: Scope&lt;'a, TitleCardProps&lt;'a&gt;&gt;) -&gt; Elem
 </blockquote>
 <p>Borrowed Props cannot be safely memoized. However, this is not a problem – Dioxus relies on the memoization of their parents to determine if they need to be rerendered.</p>
 <h2 id="optional-props"><a class="header" href="#optional-props">Optional Props</a></h2>
-<p>You can easily create optional fields by attaching the <code>optional</code> modifier to a field:</p>
+<p>You can easily create optional fields by using the <code>Option&lt;…&gt;</code> type for a field:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -286,16 +286,23 @@ fn TitleCard&lt;'a&gt;(cx: Scope&lt;'a, TitleCardProps&lt;'a&gt;&gt;) -&gt; Elem
 struct MyProps {
     name: String,
 
-    #[props(optional)]
     description: Option&lt;String&gt;
 }
 
 fn Demo(cx: MyProps) -&gt; Element {
-    todo!()
+    let text = match cx.props.description {
+        Some(d) =&gt; d,             // if a value is provided
+        None =&gt; &quot;No description&quot;  // if the prop is omitted
+    };
+    
+    cx.render(rsx! {
+        &quot;{name}&quot;: &quot;{text}&quot;
+    })
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Then, we can completely omit the description field when calling the component:</p>
+<p>In this example ˋnameˋ is a required prop and ˋdescriptionˋ is optional.
+This means we can completely omit the description field when calling the component:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -307,14 +314,33 @@ fn Demo(cx: MyProps) -&gt; Element {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>The <code>optional</code> modifier is a combination of two separate modifiers: <code>default</code> and <code>strip_option</code>. The full list of modifiers includes:</p>
+<p>Additionally if we provide a value we don't have to wrap it with ˋSome(…)ˋ. This is done automatically for us:</p>
+<p>ˋˋˋrust
+rsx!{
+Demo {
+name: &quot;Thing&quot;.to_string(),
+description: &quot;This is explains it&quot;.to_string(),
+}
+}
+ˋˋˋ</p>
+<p>If you want to make a prop required even though it is of type ˋOptionˋ you can provide the ˋ!optionalˋ modifier:</p>
+<p>ˋˋˋrust
+#[derive(Props, PartialEq)]
+struct MyProps {
+name: String,</p>
+<pre><code>#[props(!optional)]
+description: Option&lt;String&gt;
+</code></pre>
+<p>}
+ˋˋˋ</p>
+<p>This can be especially useful if you have a type alias named ˋOptionˋ in the current scope.</p>
+<p>For more information on how tags work, check out the <a href="https://github.com/idanarye/rust-typed-builder">TypedBuilder</a> crate. However, all attributes for props in Dioxus are flattened (no need for <code>setter</code> syntax) and the <code>optional</code> field is new. The <code>optional</code> modifier is a combination of two separate modifiers: <code>default</code> and <code>strip_option</code> and it is automatically detected on ˋOption&lt;…&gt;ˋ types.</p>
+<p>The full list of Dioxus' modifiers includes:</p>
 <ul>
 <li><code>default</code> - automatically add the field using its <code>Default</code> implementation</li>
-<li><code>strip_option</code> - automatically wrap values at the call site in <code>Some</code></li>
 <li><code>optional</code> - alias for <code>default</code> and <code>strip_option</code></li>
 <li><code>into</code> - automatically call <code>into</code> on the value at the callsite</li>
 </ul>
-<p>For more information on how tags work, check out the <a href="https://github.com/idanarye/rust-typed-builder">TypedBuilder</a> crate. However, all attributes for props in Dioxus are flattened (no need for <code>setter</code> syntax) and the <code>optional</code> field is new.</p>
 <h2 id="the-inline_props-macro"><a class="header" href="#the-inline_props-macro">The <code>inline_props</code> macro</a></h2>
 <p>So far, every Component function we've seen had a corresponding ComponentProps struct to pass in props. This was quite verbose... Wouldn't it be nice to have props as simple function arguments? Then we wouldn't need to define a Props struct, and instead of typing <code>cx.props.whatever</code>, we could just use <code>whatever</code> directly!</p>
 <p><code>inline_props</code> allows you to do just that. Instead of typing the &quot;full&quot; version:</p>
