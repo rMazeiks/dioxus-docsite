@@ -235,7 +235,7 @@
 rsx! ( &quot;hello {name}&quot; )
 <span class="boring">}
 </span></code></pre></pre>
-<p>Unfortunately, you cannot drop in arbitrary expressions directly into the string literal. In the cases where we need to compute a complex value, we'll want to use <code>format_args!</code> directly. Due to specifics of the <code>rsx!</code> macro (which we'll cover later), our call to <code>format_args</code> must be contained within square braces.</p>
+<p>Unfortunately, you cannot yet drop in arbitrary expressions directly into the string literal with Rust. In the cases where we need to compute a complex value, we'll want to use <code>format_args!</code> directly. Due to specifics of the <code>rsx!</code> macro (which we'll cover later), our call to <code>format_args</code> must be contained within square braces.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -306,7 +306,7 @@ rsx! ( &quot;hello {name}&quot; )
 </span></code></pre></pre>
 <h2 id="listeners"><a class="header" href="#listeners">Listeners</a></h2>
 <p>Listeners are a special type of Attribute that only accept functions. Listeners let us attach functionality to our Elements by running a provided closure whenever the specified Listener is triggered.</p>
-<p>We'll cover listeners in more depth in the Listeners chapter, but for now, just know that every listener must start with the <code>on</code> keyword and accepts closures.</p>
+<p>We'll cover listeners in more depth in the Adding Interactivity chapter, but for now, just know that every listener starts with &quot;on&quot; and accepts closures.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

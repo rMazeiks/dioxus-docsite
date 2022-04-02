@@ -158,9 +158,6 @@
 <li><code>dangerous_inner_html</code></li>
 <li>Boolean attributes</li>
 <li><code>prevent_default</code></li>
-</ul>
-<!-- - `..Attributes` -->
-<ul>
 <li>event handlers as string attributes</li>
 <li><code>value</code>, <code>checked</code>, and <code>selected</code></li>
 </ul>
@@ -199,8 +196,8 @@
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>wouldn't actually render the <code>hidden</code> attribute: </p>
-<pre><code class="language-html">&lt;div&gt;hello&lt;/div&gt; 
+<p>wouldn't actually render the <code>hidden</code> attribute:</p>
+<pre><code class="language-html">&lt;div&gt;hello&lt;/div&gt;
 </code></pre>
 <p>Not all attributes work like this however. <em>Only the following attributes</em> have this behavior:</p>
 <ul>
@@ -233,9 +230,9 @@
 </ul>
 <p>For any other attributes, a value of <code>&quot;false&quot;</code> will be sent directly to the DOM.</p>
 <h2 id="stopping-form-input-and-navigation-with-prevent_default"><a class="header" href="#stopping-form-input-and-navigation-with-prevent_default">Stopping form input and navigation with <code>prevent_default</code></a></h2>
-<p>Currently, calling <code>prevent_default</code> on events in EventHandlers is not possible from Desktop/Mobile. Until this is supported, it's possible to prevent default using the <code>prevent_default</code> attribute. </p>
+<p>Currently, calling <code>prevent_default</code> on events in EventHandlers is not possible from Desktop/Mobile. Until this is supported, it's possible to prevent default using the <code>prevent_default</code> attribute.</p>
 <blockquote>
-<p>Note: you cannot conditionally prevent default with this approach. This is a limitation until synchronous event handling is available across the Webview boundary </p>
+<p>Note: you cannot conditionally prevent default with this approach. This is a limitation until synchronous event handling is available across the Webview boundary</p>
 </blockquote>
 <p>To use <code>prevent_default</code>, simply attach the <code>prevent_default</code> attribute to a given element and set it to the name of the event handler you want to prevent default on. We can attach this attribute multiple times for multiple attributes.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -252,7 +249,7 @@
 }
 <span class="boring">}
 </span></code></pre></pre>
-<!-- 
+<!--
 ## Passing attributes into children: `..Attributes`
 
 > Note: this is an experimental, unstable feature not available in released versions of Dioxus. Feel free to skip this section.
@@ -335,7 +332,7 @@ rsx! {
 <!-- todo
 There's more to elements! For further reading, check out:
 
-- [Custom Elements]() 
+- [Custom Elements]()
 -->
 
                     </main>

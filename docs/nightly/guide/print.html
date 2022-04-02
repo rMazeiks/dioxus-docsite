@@ -550,14 +550,14 @@ fn app(cx: Scope) -&gt; Element {
 <p>At this point, you could call <code>cargo run</code> and be greeted with a simple <code>Hello, World!</code> screen:</p>
 <p><img src="images/helloworld.png" alt="hello world" /></p>
 <h3 id="dissecting-our-example"><a class="header" href="#dissecting-our-example">Dissecting our example</a></h3>
-<p>The <code>use</code> statement at the top of our app imports everything from the the <code>prelude</code> module. <code>use</code>-ing the prelude imports the right traits, types, and macros needed for working with Dioxus.</p>
+<p>The <code>use</code> statement at the top of our app imports everything from the <code>prelude</code> module. <code>use</code>-ing the prelude imports the right traits, types, and macros needed for working with Dioxus.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use dioxus::prelude::*;
 <span class="boring">}
 </span></code></pre></pre>
-<p>This initialization code launches a Tokio runtime on a helper thread where your code will run. Then, the WebView renderer will be launched on the main-thread. Due to platform requirements, the main thread is blocked by your app's event loop.</p>
+<p>This initialization code launches a Tokio runtime on a helper thread where your code will run. Then, the WebView renderer will be launched on the main thread. Due to platform requirements, the main thread is blocked by your app's event loop.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">fn main() {
     dioxus::desktop::launch(app);
 }
@@ -734,7 +734,7 @@ cx.render(rsx!(
 rsx! ( &quot;hello {name}&quot; )
 <span class="boring">}
 </span></code></pre></pre>
-<p>Unfortunately, you cannot drop in arbitrary expressions directly into the string literal. In the cases where we need to compute a complex value, we'll want to use <code>format_args!</code> directly. Due to specifics of the <code>rsx!</code> macro (which we'll cover later), our call to <code>format_args</code> must be contained within square braces.</p>
+<p>Unfortunately, you cannot yet drop in arbitrary expressions directly into the string literal with Rust. In the cases where we need to compute a complex value, we'll want to use <code>format_args!</code> directly. Due to specifics of the <code>rsx!</code> macro (which we'll cover later), our call to <code>format_args</code> must be contained within square braces.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -805,7 +805,7 @@ rsx! ( &quot;hello {name}&quot; )
 </span></code></pre></pre>
 <h2 id="listeners"><a class="header" href="#listeners">Listeners</a></h2>
 <p>Listeners are a special type of Attribute that only accept functions. Listeners let us attach functionality to our Elements by running a provided closure whenever the specified Listener is triggered.</p>
-<p>We'll cover listeners in more depth in the Listeners chapter, but for now, just know that every listener must start with the <code>on</code> keyword and accepts closures.</p>
+<p>We'll cover listeners in more depth in the Adding Interactivity chapter, but for now, just know that every listener starts with &quot;on&quot; and accepts closures.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -827,7 +827,7 @@ rsx! ( &quot;hello {name}&quot; )
 </ul>
 <p>Next, we'll compose Elements together using Rust-based logic.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="conditional-rendering"><a class="header" href="#conditional-rendering">Conditional Rendering</a></h1>
-<p>Your components will often need to display different things depending on different conditions. With Dioxus, we can use Rust's normal control flow to conditional hide, show, and modify the structure of our markup.</p>
+<p>Your components will often need to display different things depending on different conditions. With Dioxus, we can use Rust's normal control flow to conditionally hide, show, and modify the structure of our markup.</p>
 <p>In this chapter, you'll learn:</p>
 <ul>
 <li>How to return different Elements depending on a condition</li>
@@ -1153,9 +1153,6 @@ rsx!(
 <li><code>dangerous_inner_html</code></li>
 <li>Boolean attributes</li>
 <li><code>prevent_default</code></li>
-</ul>
-<!-- - `..Attributes` -->
-<ul>
 <li>event handlers as string attributes</li>
 <li><code>value</code>, <code>checked</code>, and <code>selected</code></li>
 </ul>
@@ -1194,8 +1191,8 @@ rsx!(
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>wouldn't actually render the <code>hidden</code> attribute: </p>
-<pre><code class="language-html">&lt;div&gt;hello&lt;/div&gt; 
+<p>wouldn't actually render the <code>hidden</code> attribute:</p>
+<pre><code class="language-html">&lt;div&gt;hello&lt;/div&gt;
 </code></pre>
 <p>Not all attributes work like this however. <em>Only the following attributes</em> have this behavior:</p>
 <ul>
@@ -1228,9 +1225,9 @@ rsx!(
 </ul>
 <p>For any other attributes, a value of <code>&quot;false&quot;</code> will be sent directly to the DOM.</p>
 <h2 id="stopping-form-input-and-navigation-with-prevent_default"><a class="header" href="#stopping-form-input-and-navigation-with-prevent_default">Stopping form input and navigation with <code>prevent_default</code></a></h2>
-<p>Currently, calling <code>prevent_default</code> on events in EventHandlers is not possible from Desktop/Mobile. Until this is supported, it's possible to prevent default using the <code>prevent_default</code> attribute. </p>
+<p>Currently, calling <code>prevent_default</code> on events in EventHandlers is not possible from Desktop/Mobile. Until this is supported, it's possible to prevent default using the <code>prevent_default</code> attribute.</p>
 <blockquote>
-<p>Note: you cannot conditionally prevent default with this approach. This is a limitation until synchronous event handling is available across the Webview boundary </p>
+<p>Note: you cannot conditionally prevent default with this approach. This is a limitation until synchronous event handling is available across the Webview boundary</p>
 </blockquote>
 <p>To use <code>prevent_default</code>, simply attach the <code>prevent_default</code> attribute to a given element and set it to the name of the event handler you want to prevent default on. We can attach this attribute multiple times for multiple attributes.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -1247,7 +1244,7 @@ rsx!(
 }
 <span class="boring">}
 </span></code></pre></pre>
-<!-- 
+<!--
 ## Passing attributes into children: `..Attributes`
 
 > Note: this is an experimental, unstable feature not available in released versions of Dioxus. Feel free to skip this section.
@@ -1330,7 +1327,7 @@ rsx! {
 <!-- todo
 There's more to elements! For further reading, check out:
 
-- [Custom Elements]() 
+- [Custom Elements]()
 -->
 <div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-to-components"><a class="header" href="#introduction-to-components">Introduction to Components</a></h1>
 <p>In the previous chapter, we learned about Elements and how they can be composed to create a basic user interface. Now, we'll learn how to group Elements together to form Components. We'll cover:</p>
@@ -1426,7 +1423,7 @@ fn App(cx: Scope) -&gt; Element {
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// this scope
-Scope&lt;()&gt; 
+Scope&lt;()&gt;
 
 // is the same as this scope
 Scope
@@ -1510,14 +1507,14 @@ fn Demo(cx: MyProps) -&gt; Element {
         Some(d) =&gt; d,             // if a value is provided
         None =&gt; &quot;No description&quot;  // if the prop is omitted
     };
-    
+
     cx.render(rsx! {
         &quot;{name}&quot;: &quot;{text}&quot;
     })
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>In this example ˋnameˋ is a required prop and ˋdescriptionˋ is optional.
+<p>In this example <code>name</code> is a required prop and <code>description</code> is optional.
 This means we can completely omit the description field when calling the component:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -1530,27 +1527,33 @@ This means we can completely omit the description field when calling the compone
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Additionally if we provide a value we don't have to wrap it with ˋSome(…)ˋ. This is done automatically for us:</p>
-<p>ˋˋˋrust
-rsx!{
-Demo {
-name: &quot;Thing&quot;.to_string(),
-description: &quot;This is explains it&quot;.to_string(),
+<p>Additionally if we provide a value we don't have to wrap it with <code>Some(…)</code>. This is done automatically for us:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>rsx!{
+    Demo {
+        name: &quot;Thing&quot;.to_string(),
+        description: &quot;This is explains it&quot;.to_string(),
+    }
 }
-}
-ˋˋˋ</p>
-<p>If you want to make a prop required even though it is of type ˋOptionˋ you can provide the ˋ!optionalˋ modifier:</p>
-<p>ˋˋˋrust
-#[derive(Props, PartialEq)]
+<span class="boring">}
+</span></code></pre></pre>
+<p>If you want to make a prop required even though it is of type <code>Option</code> you can provide the <code>!optional</code> modifier:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Props, PartialEq)]
 struct MyProps {
-name: String,</p>
-<pre><code>#[props(!optional)]
-description: Option&lt;String&gt;
-</code></pre>
-<p>}
-ˋˋˋ</p>
-<p>This can be especially useful if you have a type alias named ˋOptionˋ in the current scope.</p>
-<p>For more information on how tags work, check out the <a href="https://github.com/idanarye/rust-typed-builder">TypedBuilder</a> crate. However, all attributes for props in Dioxus are flattened (no need for <code>setter</code> syntax) and the <code>optional</code> field is new. The <code>optional</code> modifier is a combination of two separate modifiers: <code>default</code> and <code>strip_option</code> and it is automatically detected on ˋOption&lt;…&gt;ˋ types.</p>
+    name: String,
+
+    #[props(!optional)]
+    description: Option&lt;String&gt;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This can be especially useful if you have a type alias named <code>Option</code> in the current scope.</p>
+<p>For more information on how tags work, check out the <a href="https://github.com/idanarye/rust-typed-builder">TypedBuilder</a> crate. However, all attributes for props in Dioxus are flattened (no need for <code>setter</code> syntax) and the <code>optional</code> field is new. The <code>optional</code> modifier is a combination of two separate modifiers: <code>default</code> and <code>strip_option</code> and it is automatically detected on <code>Option&lt;…&gt;</code> types.</p>
 <p>The full list of Dioxus' modifiers includes:</p>
 <ul>
 <li><code>default</code> - automatically add the field using its <code>Default</code> implementation</li>
@@ -1877,7 +1880,7 @@ pub fn ActionCard(Scope&lt;ActionCardProps&gt;) -&gt; Element {}
 <span class="boring">}
 </span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="passing-children-and-attributes"><a class="header" href="#passing-children-and-attributes">Passing children and attributes</a></h1>
-<p>Often times, you'll want to wrap some important functionality <em>around</em> your state, not directly nested <em>inside</em> another component. In these cases, you'll want to pass elements and attributes into a component and let the component place them appropriately.</p>
+<p>Oftentimes, you'll want to wrap some important functionality <em>around</em> your state, not directly nested <em>inside</em> another component. In these cases, you'll want to pass elements and attributes into a component and let the component place them appropriately.</p>
 <p>In this chapter, you'll learn about:</p>
 <ul>
 <li>Passing elements into components</li>
@@ -2434,7 +2437,7 @@ impl PartialEq for CustomProps {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Using asynchronous code can be difficult! This is just scratching the surface of what's possible. We have an entire chapter on using async properly in your Dioxus Apps. We have an entire section dedicated to using <code>async</code> properly later in this book.</p>
+<p>Using asynchronous code can be difficult! This is just scratching the surface of what's possible. We have an entire chapter on using async properly in your Dioxus Apps.</p>
 <h3 id="how-do-i-tell-dioxus-that-my-state-changed"><a class="header" href="#how-do-i-tell-dioxus-that-my-state-changed">How do I tell Dioxus that my state changed?</a></h3>
 <p>Whenever you inform Dioxus that the component needs to be updated, it will &quot;render&quot; your component again, storing the previous and current Elements in memory. Dioxus will automatically figure out the differences between the old and the new and generate a list of edits that the renderer needs to apply to change what's on the screen. This process is called &quot;diffing&quot;:</p>
 <p><img src="interactivity/../images/diffing.png" alt="Diffing" /></p>
@@ -2442,23 +2445,11 @@ impl PartialEq for CustomProps {
 <p>With these building blocks, we can craft new hooks similar to <code>use_state</code> that let us easily tell Dioxus that new information is ready to be sent to the screen.</p>
 <h3 id="how-do-i-update-my-state-efficiently"><a class="header" href="#how-do-i-update-my-state-efficiently">How do I update my state efficiently?</a></h3>
 <p>In general, Dioxus should be plenty fast for most use cases. However, there are some rules you should consider following to ensure your apps are quick.</p>
-<ul>
-<li>
 <ol>
 <li><strong>Don't call set_state <em>while rendering</em></strong>. This will cause Dioxus to unnecessarily re-check the component for updates or enter an infinite loop.</li>
-</ol>
-</li>
-<li>
-<ol start="2">
 <li><strong>Break your state apart into smaller sections.</strong> Hooks are explicitly designed to &quot;unshackle&quot; your state from the typical model-view-controller paradigm, making it easy to reuse useful bits of code with a single function.</li>
-</ol>
-</li>
-<li>
-<ol start="3">
 <li><strong>Move local state down</strong>. Dioxus will need to re-check child components of your app if the root component is constantly being updated. You'll get best results if rapidly-changing state does not cause major re-renders.</li>
 </ol>
-</li>
-</ul>
 <!-- todo: link when the section exists
 Don't worry - Dioxus is fast. But, if your app needs *extreme performance*, then take a look at the `Performance Tuning` in the `Advanced Guides` book.
 -->
@@ -2490,7 +2481,7 @@ function Component(props) {
 <li>Handling user input</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="event-handlers"><a class="header" href="#event-handlers">Event handlers</a></h1>
-<p>To make our boring UIs less static and more interesting, we want to add the ability to interact to user input. To do this, we need to add some event handlers.</p>
+<p>To make our boring UIs less static and more interesting, we want to add the ability to interact with user input. To do this, we need to add some event handlers.</p>
 <h2 id="the-most-basic-events-clicks"><a class="header" href="#the-most-basic-events-clicks">The most basic events: clicks</a></h2>
 <p>If you've poked around in the Dioxus examples at all, you've definitely noticed the support for buttons and clicks. To add some basic action when a button is clicked, we need to define a button and then attach an &quot;onclick&quot; handler to it.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -2571,7 +2562,7 @@ fn app(cx: Scope) -&gt; Element {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>In this particular layout, a click on the inner div is transitively also a click on the outer div. If we didn't want the outer div to be triggered every time we trigger the inner div, then we'd want to call &quot;cancel_bubble&quot;.</p>
+<p>In this particular layout, a click on the inner div is transitively also a click on the outer div. If we didn't want the outer div to be triggered every time we trigger the inner div, then we'd want to call <code>cancel_bubble()</code>.</p>
 <p>This will prevent any listeners above the current listener from being triggered.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -2590,7 +2581,7 @@ fn app(cx: Scope) -&gt; Element {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="prevent-default"><a class="header" href="#prevent-default">Prevent Default</a></h2>
-<p>With HTML based renderers, the browser will automatically perform some action. For text inputs, this would be entering the provided key. For forms, this might involve navigating the page.</p>
+<p>With HTML-based renderers, the browser will automatically perform some action. For text inputs, this would be entering the provided key. For forms, this might involve navigating the page.</p>
 <p>In some instances, you don't want this default behavior. In these cases, instead of handling the event directly, you'd want to prevent any default handlers.</p>
 <p>Normally, in React or JavaScript, you'd call &quot;preventDefault&quot; on the event in the callback. Dioxus does <em>not</em> currently support this behavior. Instead, you need to add an attribute to the element generating the event.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -2852,7 +2843,7 @@ names.iter().map(|name| {
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="fundamental-hook-use_state"><a class="header" href="#fundamental-hook-use_state">Fundamental hook: <code>use_state</code></a></h1>
 <p>The first fundamental hook for state management is <code>use_state</code>. This particular hook is designed to work well with the entire Dioxus ecosystem including futures, children, and memoization.</p>
-<h2 id="basic-usage"><a class="header" href="#basic-usage">Basic usage.</a></h2>
+<h2 id="basic-usage"><a class="header" href="#basic-usage">Basic usage</a></h2>
 <p>The simplest use case of <code>use_state</code> is a simple counter. The handle returned by <code>use_state</code> implements <code>Add</code> and <code>AddAssign</code>. Writing through <code>AddAssign</code> will automatically mark the component as dirty, forcing an update.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -3173,10 +3164,10 @@ cx.render(rsx!{
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="uncontrolled-inputs"><a class="header" href="#uncontrolled-inputs">Uncontrolled Inputs</a></h2>
-<p>When working with large sets of inputs, you might be quickly tired of creating <code>use_state</code> for each value. Additionally, the pattern of one use_state per interaction might deteriorate when you need to have a flexible number of inputs. In these cases, we use &quot;uncontrolled&quot; inputs. Here, we don't drive the value of the input from the use_state, choosing to leave it in an &quot;uncontrolled&quot; state.</p>
-<p>This approach can be more performant, more flexible, but more prone to UI inconsistencies than its controlled counterpart.</p>
+<p>When working with large sets of inputs, you might be quickly tired of creating <code>use_state</code> for each value. Additionally, the pattern of one <code>use_state</code> per interaction might deteriorate when you need to have a flexible number of inputs. In these cases, we use &quot;uncontrolled&quot; inputs. Here, we don't drive the value of the input from the <code>use_state</code>, choosing to leave it in an &quot;uncontrolled&quot; state.</p>
+<p>This approach can be more performant and more flexible, but more prone to UI inconsistencies than its controlled counterpart.</p>
 <p>To use the &quot;uncontrolled&quot; pattern, we simply omit setting the value of the input. Instead, we can react to the change directly on the input itself, or from a form element higher up in the tree.</p>
-<p>For this example, we don't attach any <code>use_state</code> handles into the labels. Instead, we simply attach an &quot;oninput&quot; handler to the form element. This will run each time any of the child inputs change, allowing us to perform tasks like form validation.</p>
+<p>For this example, we don't attach any <code>use_state</code> handles into the labels. Instead, we simply attach an <code>oninput</code> handler to the form element. This will run each time any of the child inputs change, allowing us to perform tasks like form validation.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -3193,12 +3184,12 @@ cx.render(rsx!{
 <span class="boring">}
 </span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="managing-state"><a class="header" href="#managing-state">Managing State</a></h1>
-<p>Every app you'll build with Dioxus will have some sort of state that needs to be maintained and updated as your users interact with it. However, managing state can be particular challenging at times, and is frequently the source of bugs in many GUI frameworks.</p>
+<p>Every app you'll build with Dioxus will have some sort of state that needs to be maintained and updated as your users interact with it. However, managing state can be particularly challenging at times, and is frequently the source of bugs in many GUI frameworks.</p>
 <p>In this chapter, we'll cover the various ways to manage state, the appropriate terminology, various patterns, and some problems you might run into.</p>
 <h2 id="the-problem"><a class="header" href="#the-problem">The Problem</a></h2>
 <p>Why do people say state management is so difficult? What does it mean?</p>
 <p>Generally, state management is the code you need to write to ensure that your app renders the <em>correct</em> content. If the user inputs a name, then you need to display the appropriate response - like alerts, validation, and disable/enable various elements on the page. Things can quickly become tricky if you need loading screens and cancellable tasks.</p>
-<p>For the simplest of apps, all your state can enter the app from the root props. This is common in server-side rendering - we can collect all of the required state <em>before</em> rendering the content.</p>
+<p>For the simplest of apps, all of your state can enter the app from the root props. This is common in server-side rendering - we can collect all of the required state <em>before</em> rendering the content.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -3851,7 +3842,7 @@ dioxus = { version = &quot;0.2&quot;, features = [&quot;desktop&quot;, &quot;rou
 </span></code></pre></pre>
 <h2 id="more-reading"><a class="header" href="#more-reading">More reading</a></h2>
 <p>This page is just meant to be a very brief overview of the router to show you that there's a powerful solution already built for a very common problem. For more information about the router, definitely check out its book or check out some of the examples.</p>
-<p>The router has its own documentation! <a href="https://dioxuslabs.com/router_guide/">Available here</a>.</p>
+<p>The router has its own documentation! <a href="https://dioxuslabs.com/router/guide/">Available here</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="working-with-async"><a class="header" href="#working-with-async">Working with Async</a></h1>
 <p>Not all apps you'll build can be self-contained with synchronous code. You'll often need to interact with file systems, network interfaces, hardware, or timers.</p>
 <p>So far, we've only talked about building apps with synchronous code, so this chapter will focus integrating asynchronous code into your app.</p>

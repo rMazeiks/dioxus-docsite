@@ -152,12 +152,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="managing-state"><a class="header" href="#managing-state">Managing State</a></h1>
-<p>Every app you'll build with Dioxus will have some sort of state that needs to be maintained and updated as your users interact with it. However, managing state can be particular challenging at times, and is frequently the source of bugs in many GUI frameworks.</p>
+<p>Every app you'll build with Dioxus will have some sort of state that needs to be maintained and updated as your users interact with it. However, managing state can be particularly challenging at times, and is frequently the source of bugs in many GUI frameworks.</p>
 <p>In this chapter, we'll cover the various ways to manage state, the appropriate terminology, various patterns, and some problems you might run into.</p>
 <h2 id="the-problem"><a class="header" href="#the-problem">The Problem</a></h2>
 <p>Why do people say state management is so difficult? What does it mean?</p>
 <p>Generally, state management is the code you need to write to ensure that your app renders the <em>correct</em> content. If the user inputs a name, then you need to display the appropriate response - like alerts, validation, and disable/enable various elements on the page. Things can quickly become tricky if you need loading screens and cancellable tasks.</p>
-<p>For the simplest of apps, all your state can enter the app from the root props. This is common in server-side rendering - we can collect all of the required state <em>before</em> rendering the content.</p>
+<p>For the simplest of apps, all of your state can enter the app from the root props. This is common in server-side rendering - we can collect all of the required state <em>before</em> rendering the content.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

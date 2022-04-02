@@ -210,7 +210,7 @@ fn App(cx: Scope) -&gt; Element {
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// this scope
-Scope&lt;()&gt; 
+Scope&lt;()&gt;
 
 // is the same as this scope
 Scope
@@ -294,14 +294,14 @@ fn Demo(cx: MyProps) -&gt; Element {
         Some(d) =&gt; d,             // if a value is provided
         None =&gt; &quot;No description&quot;  // if the prop is omitted
     };
-    
+
     cx.render(rsx! {
         &quot;{name}&quot;: &quot;{text}&quot;
     })
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>In this example ˋnameˋ is a required prop and ˋdescriptionˋ is optional.
+<p>In this example <code>name</code> is a required prop and <code>description</code> is optional.
 This means we can completely omit the description field when calling the component:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -314,27 +314,33 @@ This means we can completely omit the description field when calling the compone
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Additionally if we provide a value we don't have to wrap it with ˋSome(…)ˋ. This is done automatically for us:</p>
-<p>ˋˋˋrust
-rsx!{
-Demo {
-name: &quot;Thing&quot;.to_string(),
-description: &quot;This is explains it&quot;.to_string(),
+<p>Additionally if we provide a value we don't have to wrap it with <code>Some(…)</code>. This is done automatically for us:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>rsx!{
+    Demo {
+        name: &quot;Thing&quot;.to_string(),
+        description: &quot;This is explains it&quot;.to_string(),
+    }
 }
-}
-ˋˋˋ</p>
-<p>If you want to make a prop required even though it is of type ˋOptionˋ you can provide the ˋ!optionalˋ modifier:</p>
-<p>ˋˋˋrust
-#[derive(Props, PartialEq)]
+<span class="boring">}
+</span></code></pre></pre>
+<p>If you want to make a prop required even though it is of type <code>Option</code> you can provide the <code>!optional</code> modifier:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Props, PartialEq)]
 struct MyProps {
-name: String,</p>
-<pre><code>#[props(!optional)]
-description: Option&lt;String&gt;
-</code></pre>
-<p>}
-ˋˋˋ</p>
-<p>This can be especially useful if you have a type alias named ˋOptionˋ in the current scope.</p>
-<p>For more information on how tags work, check out the <a href="https://github.com/idanarye/rust-typed-builder">TypedBuilder</a> crate. However, all attributes for props in Dioxus are flattened (no need for <code>setter</code> syntax) and the <code>optional</code> field is new. The <code>optional</code> modifier is a combination of two separate modifiers: <code>default</code> and <code>strip_option</code> and it is automatically detected on ˋOption&lt;…&gt;ˋ types.</p>
+    name: String,
+
+    #[props(!optional)]
+    description: Option&lt;String&gt;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>This can be especially useful if you have a type alias named <code>Option</code> in the current scope.</p>
+<p>For more information on how tags work, check out the <a href="https://github.com/idanarye/rust-typed-builder">TypedBuilder</a> crate. However, all attributes for props in Dioxus are flattened (no need for <code>setter</code> syntax) and the <code>optional</code> field is new. The <code>optional</code> modifier is a combination of two separate modifiers: <code>default</code> and <code>strip_option</code> and it is automatically detected on <code>Option&lt;…&gt;</code> types.</p>
 <p>The full list of Dioxus' modifiers includes:</p>
 <ul>
 <li><code>default</code> - automatically add the field using its <code>Default</code> implementation</li>

@@ -152,7 +152,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="event-handlers"><a class="header" href="#event-handlers">Event handlers</a></h1>
-<p>To make our boring UIs less static and more interesting, we want to add the ability to interact to user input. To do this, we need to add some event handlers.</p>
+<p>To make our boring UIs less static and more interesting, we want to add the ability to interact with user input. To do this, we need to add some event handlers.</p>
 <h2 id="the-most-basic-events-clicks"><a class="header" href="#the-most-basic-events-clicks">The most basic events: clicks</a></h2>
 <p>If you've poked around in the Dioxus examples at all, you've definitely noticed the support for buttons and clicks. To add some basic action when a button is clicked, we need to define a button and then attach an &quot;onclick&quot; handler to it.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -233,7 +233,7 @@ fn app(cx: Scope) -&gt; Element {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>In this particular layout, a click on the inner div is transitively also a click on the outer div. If we didn't want the outer div to be triggered every time we trigger the inner div, then we'd want to call &quot;cancel_bubble&quot;.</p>
+<p>In this particular layout, a click on the inner div is transitively also a click on the outer div. If we didn't want the outer div to be triggered every time we trigger the inner div, then we'd want to call <code>cancel_bubble()</code>.</p>
 <p>This will prevent any listeners above the current listener from being triggered.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -252,7 +252,7 @@ fn app(cx: Scope) -&gt; Element {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="prevent-default"><a class="header" href="#prevent-default">Prevent Default</a></h2>
-<p>With HTML based renderers, the browser will automatically perform some action. For text inputs, this would be entering the provided key. For forms, this might involve navigating the page.</p>
+<p>With HTML-based renderers, the browser will automatically perform some action. For text inputs, this would be entering the provided key. For forms, this might involve navigating the page.</p>
 <p>In some instances, you don't want this default behavior. In these cases, instead of handling the event directly, you'd want to prevent any default handlers.</p>
 <p>Normally, in React or JavaScript, you'd call &quot;preventDefault&quot; on the event in the callback. Dioxus does <em>not</em> currently support this behavior. Instead, you need to add an attribute to the element generating the event.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
