@@ -196,7 +196,7 @@ fn app(cx: Scope) -&gt; Element {
 <p>To build our app and publish it to Github:</p>
 <ul>
 <li>Make sure Github Pages is set up for your repo</li>
-<li>Build your app with <code>trunk build --release</code></li>
+<li>Build your app with <code>trunk build --release</code> (include <code>--public-url &lt;repo-name&gt;</code> to update asset prefixes if using a project site)</li>
 <li>Move your generated HTML/CSS/JS/Wasm from <code>dist</code> into the folder configured for Github Pages</li>
 <li>Add and commit with git</li>
 <li>Push to Github</li>
