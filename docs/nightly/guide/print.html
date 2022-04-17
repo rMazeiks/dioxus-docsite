@@ -3231,8 +3231,8 @@ cx.render(rsx!{
     ul {
         todos.read().iter().enumerate().map(|(id, todo)| rsx!{
             li {
+                onhover: move |_| *todos.write()[id].is_hovered = true,
                 h1 { &quot;{todo.contents}&quot; }
-                onhover: move |_| *todos.write()[id].is_hovered = true;
             }
         })
     }
