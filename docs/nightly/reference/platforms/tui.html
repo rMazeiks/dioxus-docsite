@@ -147,21 +147,17 @@
 <p>TUI support is currently quite experimental. Even the project name will change. But, if you're willing to venture into the realm of the unknown, this guide will get you started.</p>
 <p><a href="https://github.com/DioxusLabs/rink/raw/master/examples/example.png">TUI Support</a></p>
 <h2 id="getting-set-up"><a class="header" href="#getting-set-up">Getting Set up</a></h2>
-<p>To tinker with TUI support, start by making a new package and adding our TUI package from git.</p>
+<p>To tinker with TUI support, start by making a new package and adding our TUI feature.</p>
 <pre><code class="language-shell">$ cargo new --bin demo
 $ cd demo
-$ cargo add dioxus
-$ cargo add rink --git https://github.com/DioxusLabs/rink.git
+$ cargo add dioxus --features tui
 </code></pre>
 <p>Then, edit your <code>main.rs</code> with the basic template. </p>
 <pre><pre class="playground"><code class="language-rust">//  main
 use dioxus::prelude::*;
 
 fn main() {
-    let mut dom = VirtualDom::new(app);
-    dom.rebuild();
-
-    rink::render_vdom(&amp;mut dom).unwrap();
+    dioxus::tui::launch(app);
 }
 
 fn app(cx: Scope) -&gt; Element {
@@ -181,7 +177,42 @@ fn app(cx: Scope) -&gt; Element {
 <p>To run our app:</p>
 <pre><code class="language-shell">$ cargo run
 </code></pre>
-<p>Press &quot;q&quot; to close the app (yes, this is hardcoded, we are working on handlers to expose this in your code.)</p>
+<p>Press &quot;ctrl-c&quot; to close the app. To switch from &quot;ctrl-c&quot; to  just &quot;q&quot; to quit you can launch the app with a configuration to disable the default quit and use the root TuiContext to quit on your own.</p>
+<pre><pre class="playground"><code class="language-rust">//  main
+use dioxus::events::{KeyCode, KeyboardEvent};
+use dioxus::prelude::*;
+use dioxus::tui::TuiContext;
+
+fn main() {
+    dioxus::tui::launch_cfg(
+        app,
+        dioxus::tui::Config {
+            ctrl_c_quit: false,
+            // Some older terminals only support 16 colors or ANSI colors if your terminal is one of these change this to BaseColors or ANSI
+            rendering_mode: dioxus::tui::RenderingMode::Rgb,
+        },
+    );
+}
+
+fn app(cx: Scope) -&gt; Element {
+    let tui_ctx: TuiContext = cx.consume_context().unwrap();
+
+    cx.render(rsx! {
+        div {
+            width: &quot;100%&quot;,
+            height: &quot;10px&quot;,
+            background_color: &quot;red&quot;,
+            justify_content: &quot;center&quot;,
+            align_items: &quot;center&quot;,
+            onkeydown: move |k: KeyboardEvent| if let KeyCode::Q = k.data.key_code {
+                tui_ctx.quit();
+            },
+
+            &quot;Hello world!&quot;
+        }
+    })
+}
+</code></pre></pre>
 <h2 id="notes"><a class="header" href="#notes">Notes</a></h2>
 <ul>
 <li>Our TUI package uses flexbox for layout</li>
