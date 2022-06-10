@@ -201,7 +201,7 @@
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn App(cx: Scope)-&gt; Element {
-    let (post, set_post) = use_state(&amp;cx, || {
+    let post = use_state(&amp;cx, || {
         PostData {
             id: Uuid::new_v4(),
             score: 10,
@@ -246,11 +246,11 @@
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn App(cx: Scope)-&gt; Element {
-    let (post, set_post) = use_state(&amp;cx, || PostData::new());
+    let post = use_state(&amp;cx, || PostData::new());
 
     cx.render(rsx!{
         button {
-            onclick: move |_| set_post(PostData::random())
+            onclick: move |_| post.set(PostData::random())
             &quot;Generate a random post&quot;
         }
         Post { props: &amp;post }
@@ -274,19 +274,19 @@
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn App(cx: Scope)-&gt; Element {
-    let (elapsed, set_elapsed) = use_state(&amp;cx, || 0);
-
-    use_future(&amp;cx, || {
-        to_owned![set_elapsed]; // explicitly capture this hook for use in async
+    let elapsed = use_state(&amp;cx, || 0);
+    
+    use_future(&amp;cx, (), |()| {
+        to_owned![elapsed]; // explicitly capture this hook for use in async
         async move {
             loop {
-                TimeoutFuture::from_ms(1000).await;
-                set_elapsed.modify(|i| i + 1)
+                gloo_timers::future::TimeoutFuture::new(1_000).await;
+                elapsed.modify(|i| i + 1)
             }
         }
     });
 
-    rsx!(cx, div { &quot;Current stopwatch time: {sec_elapsed}&quot; })
+    rsx!(cx, div { &quot;Current stopwatch time: {elapsed}&quot; })
 }
 <span class="boring">}
 </span></code></pre></pre>
